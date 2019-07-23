@@ -2,8 +2,6 @@ import { NativeModules, DeviceEventEmitter, Platform } from "react-native";
 
 const { RNProximity } = NativeModules;
 
-export default RNProximity;
-
 let addListener = null;
 let removeListener = null;
 
