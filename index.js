@@ -9,11 +9,11 @@ let removeListener = null;
 
 if (Platform.OS === "ios") {
   (addListener = function(callback) {
-    NativeModules.RNProximity.proximityEnabled(true);
+    RNProximity.proximityEnabled(true);
     return DeviceEventEmitter.addListener("proximityStateDidChange", callback);
   }),
     (removeListener = function(listener) {
-      NativeModules.RNProximity.proximityEnabled(false);
+      RNProximity.proximityEnabled(false);
       DeviceEventEmitter.removeAllListeners(
         "proximityStateDidChange",
         listener
@@ -21,19 +21,19 @@ if (Platform.OS === "ios") {
     });
 } else if (Platform.OS == "android") {
   addListener = callback => {
-    nativeModule.addListener();
+    RNProximity.addListener();
 
-    DeviceEventEmitter.addListener(nativeModule.EVENT_ON_SENSOR_CHANGE, e => {
-      console.warn(nativeModule.EVENT_ON_SENSOR_CHANGE);
+    DeviceEventEmitter.addListener(RNProximity.EVENT_ON_SENSOR_CHANGE, e => {
+      console.warn(RNProximity.EVENT_ON_SENSOR_CHANGE);
       console.warn(e);
 
       callback(e);
     });
   };
   removeListener = listener => {
-    nativeModule.removeListener();
+    RNProximity.removeListener();
     DeviceEventEmitter.removeAllListeners(
-      nativeModule.EVENT_ON_SENSOR_CHANGE,
+      RNProximity.EVENT_ON_SENSOR_CHANGE,
       listener
     );
   };
