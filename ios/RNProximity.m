@@ -1,16 +1,13 @@
-//
-//  RNProximity.m
-//
-//  Created by William Bout
-//
 
-#import <React/RCTBridge.h>
-#import <React/RCTEventDispatcher.h>
 #import "RNProximity.h"
 
 @implementation RNProximity
-
 @synthesize bridge = _bridge;
+
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
 
 - (instancetype)init
 {
@@ -34,7 +31,7 @@
                                                 body:@{@"proximity": @(proximityState)}];
 }
 
-RCT_EXPORT_MODULE();
+RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(proximityEnabled:(BOOL)enabled) {
   [[UIDevice currentDevice] setProximityMonitoringEnabled:enabled];

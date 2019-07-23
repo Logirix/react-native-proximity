@@ -1,55 +1,53 @@
-[![npm version](https://badge.fury.io/js/react-native-proximity.svg)](https://badge.fury.io/js/react-native-proximity)
 
 # react-native-proximity
 
-A React Native wrapper that provides access to the state of the proximity sensor for iOS and Android.
+## Getting started
 
-![](https://github.com/williambout/react-native-proximity/raw/master/demo.gif)
+`$ npm install react-native-proximity --save`
 
-*Usage of react-native-proximity and scrollview.*
+### Mostly automatic installation
 
-## Getting Started
+`$ react-native link react-native-proximity`
 
-- Install the library 
-```shell
-npm install --save react-native-proximity
-```
-- Link the library 
-```shell
-react-native link react-native-proximity
-```
+### Manual installation
+
+
+#### iOS
+
+1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
+2. Go to `node_modules` ➜ `react-native-proximity` and add `RNProximity.xcodeproj`
+3. In XCode, in the project navigator, select your project. Add `libRNProximity.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+4. Run your project (`Cmd+R`)<
+
+#### Android
+
+1. Open up `android/app/src/main/java/[...]/MainActivity.java`
+  - Add `import com.reactlibrary.RNProximityPackage;` to the imports at the top of the file
+  - Add `new RNProximityPackage()` to the list returned by the `getPackages()` method
+2. Append the following lines to `android/settings.gradle`:
+  	```
+  	include ':react-native-proximity'
+  	project(':react-native-proximity').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-proximity/android')
+  	```
+3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+  	```
+      compile project(':react-native-proximity')
+  	```
+
+#### Windows
+[Read it! :D](https://github.com/ReactWindows/react-native)
+
+1. In Visual Studio add the `RNProximity.sln` in `node_modules/react-native-proximity/windows/RNProximity.sln` folder to their solution, reference from their app.
+2. Open up your `MainPage.cs` app
+  - Add `using Proximity.RNProximity;` to the usings at the top of the file
+  - Add `new RNProximityPackage()` to the `List<IReactPackage>` returned by the `Packages` method
+
 
 ## Usage
-
-Import the library
-
 ```javascript
-import Proximity from 'react-native-proximity';
+import RNProximity from 'react-native-proximity';
+
+// TODO: What to do with the module?
+RNProximity;
 ```
-
-### addListener(callback)
-The callback function returns an object with *proximity* and *distance* properties. If *proximity* is true, it means the device is close to an physical object. *distance* is only supported in Android.
-```javascript
-componentDidMount(){
- Proximity.addListener(this._proximityListener);
-},
-
-/**
- * State of proximity sensor
- * @param {object} data
- */
- _proximityListener(data) {
-   this.setState({
-     proximity: data.proximity,
-     distance: data.distance // Android-only 
-   });
- },
-```
-
-### removeListener(callback)
-
-```javascript
-componentWillUnmount() {
-  Proximity.removeListener(this._proximityListener);
-},
-```
+  

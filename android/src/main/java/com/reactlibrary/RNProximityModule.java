@@ -6,7 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
@@ -41,9 +41,8 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
 
   public void sendEvent(String eventName, @Nullable WritableMap params) {
     if (this.reactContext.hasActiveCatalystInstance()) {
-      this.reactContext
-              .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-              .emit(eventName, params);
+      Log.i(TAG, params.toHashMap().toString());
+      this.reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
     } else {
       Log.i(TAG, "Waiting for CatalystInstance");
     }
@@ -65,13 +64,6 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
   }
 
   @Override
-  public Map<String, Object> getConstants() {
-    final Map<String, Object> constants = new HashMap<>();
-    constants.put(KEY_EVENT_ON_SENSOR_CHANGE, EVENT_ON_SENSOR_CHANGE);
-    return constants;
-  }
-
-  @Override
   public void onSensorChanged(SensorEvent sensorEvent) {
     WritableMap params = Arguments.createMap();
 
@@ -81,6 +73,7 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
 
     params.putBoolean(KEY_PROXIMITY, isNearDevice);
     params.putDouble(KEY_DISTANCE, distance);
+    Log.i(TAG, EVENT_ON_SENSOR_CHANGE);
 
     sendEvent(EVENT_ON_SENSOR_CHANGE, params);
   }
