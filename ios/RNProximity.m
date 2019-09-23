@@ -25,7 +25,6 @@
 
 - (void)sensorStateChange:(NSNotificationCenter *)notification
 {
-    RCTLogInfo(@"enter sensor");
     BOOL proximityState = [[UIDevice currentDevice] proximityState];
     [_bridge.eventDispatcher sendDeviceEventWithName:@"proximityStateDidChange"
                                                 body:@{@"proximity": @(proximityState)}];
