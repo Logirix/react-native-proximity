@@ -34,7 +34,6 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(proximityEnabled:(BOOL)enabled) {
-   RCTLogInfo(@"enter");
   [[UIDevice currentDevice] setProximityMonitoringEnabled:enabled];
 }
 
