@@ -6,22 +6,19 @@ let addListener = null;
 let removeListener = null;
 
 if (Platform.OS === "ios") {
-  (addListener = function(callback) {
+  addListener = function(callback) {
     console.warn("here");
-    console.warn(RNProximity);
+    console.warn(NativeModules);
 
     RNProximity.proximityEnabled(true);
     return DeviceEventEmitter.addListener("proximityStateDidChange", callback);
-  }),
-    (removeListener = function(listener) {
-      console.warn("here2");
-      RNProximity.proximityEnabled(false);
-      DeviceEventEmitter.removeAllListeners(
-        "proximityStateDidChange",
-        listener
-      );
-    });
-} else if (Platform.OS == "android") {
+  };
+  removeListener = function(listener) {
+    console.warn("here2");
+    RNProximity.proximityEnabled(false);
+    DeviceEventEmitter.removeAllListeners("proximityStateDidChange", listener);
+  };
+} else if (Platform.OS === "android") {
   addListener = callback => {
     RNProximity.addListener();
 
