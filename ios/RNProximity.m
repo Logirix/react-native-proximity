@@ -1,5 +1,6 @@
 
 #import "RNProximity.h"
+#import <React/RCTLog.h>
 
 @implementation RNProximity
 @synthesize bridge = _bridge;
@@ -34,6 +35,7 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(proximityEnabled:(BOOL)enabled) {
+   RCTLogInfo(@"enter");
   [[UIDevice currentDevice] setProximityMonitoringEnabled:enabled];
 }
 
