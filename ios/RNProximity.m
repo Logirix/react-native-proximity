@@ -1,6 +1,5 @@
-
 #import "RNProximity.h"
-#import <React/RCTLog.h>
+
 
 @implementation RNProximity
 @synthesize bridge = _bridge;
@@ -23,7 +22,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 - (void)sensorStateChange:(NSNotificationCenter *)notification
 {
