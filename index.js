@@ -7,10 +7,13 @@ let removeListener = null;
 
 if (Platform.OS === "ios") {
   (addListener = function(callback) {
+    console.warn("here");
+
     RNProximity.proximityEnabled(true);
     return DeviceEventEmitter.addListener("proximityStateDidChange", callback);
   }),
     (removeListener = function(listener) {
+      console.warn("here2");
       RNProximity.proximityEnabled(false);
       DeviceEventEmitter.removeAllListeners(
         "proximityStateDidChange",
