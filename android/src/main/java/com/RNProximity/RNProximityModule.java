@@ -65,6 +65,13 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
     }
 
     @Override
+    public Map<String, Object> getConstants() {
+      final Map<String, Object> constants = new HashMap<>();
+      constants.put(KEY_EVENT_ON_SENSOR_CHANGE, EVENT_ON_SENSOR_CHANGE);
+      return constants;
+    }
+
+    @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         WritableMap params = Arguments.createMap();
 
