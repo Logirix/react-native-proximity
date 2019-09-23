@@ -48,6 +48,8 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
 
       @ReactMethod
       public void addListener() {
+        Log.i(TAG, "add listener");
+
         mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
       }
 
