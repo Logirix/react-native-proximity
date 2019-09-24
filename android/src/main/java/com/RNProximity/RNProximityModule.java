@@ -35,12 +35,10 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
         this.reactContext = reactContext;
         mSensorManager = (SensorManager) reactContext.getSystemService(Context.SENSOR_SERVICE);
         mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        Log.i(TAG, "init");
     }
 
     public void sendEvent(String eventName, @Nullable WritableMap params) {
         if (this.reactContext.hasActiveCatalystInstance()) {
-          Log.i(TAG, params.toHashMap().toString());
           this.reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, params);
         } else {
           Log.i(TAG, "Waiting for CatalystInstance");
@@ -49,8 +47,6 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
 
       @ReactMethod
       public void addListener() {
-        Log.i(TAG, "add listener");
-
         mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
       }
 
@@ -81,7 +77,6 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
 
         params.putBoolean(KEY_PROXIMITY, isNearDevice);
         params.putDouble(KEY_DISTANCE, distance);
-        Log.i(TAG, EVENT_ON_SENSOR_CHANGE);
 
         sendEvent(EVENT_ON_SENSOR_CHANGE, params);
     }

@@ -19,9 +19,6 @@ if (Platform.OS === "ios") {
     RNProximity.addListener();
 
     DeviceEventEmitter.addListener(RNProximity.EVENT_ON_SENSOR_CHANGE, e => {
-      console.warn(RNProximity.EVENT_ON_SENSOR_CHANGE);
-      console.warn(e);
-
       callback(e);
     });
   };
