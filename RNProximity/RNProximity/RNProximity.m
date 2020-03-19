@@ -43,13 +43,13 @@ RCT_EXPORT_METHOD(proximityEnabled:(BOOL)enabled) {
 RCT_EXPORT_METHOD(hasProximitySensor: (RCTPromiseResolveBlock) resolve
             rejecter:
             (RCTPromiseRejectBlock) reject) {
-
-    UIDevice *device = [UIDevice currentDevice];
-    [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
-    BOOL exists = device.proximityMonitoringEnabled;
-    [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
-    resolve(@(exists));
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIDevice *device = [UIDevice currentDevice];
+        [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+        BOOL exists = device.proximityMonitoringEnabled;
+        [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
+        resolve(@(exists));
+    });
 }
 
 @end
