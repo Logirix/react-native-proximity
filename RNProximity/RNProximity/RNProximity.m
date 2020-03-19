@@ -40,4 +40,16 @@ RCT_EXPORT_METHOD(proximityEnabled:(BOOL)enabled) {
   [[UIDevice currentDevice] setProximityMonitoringEnabled:enabled];
 }
 
+RCT_EXPORT_METHOD(hasProximitySensor: (RCTPromiseResolveBlock) resolve
+            rejecter:
+            (RCTPromiseRejectBlock) reject) {
+
+    UIDevice *device = [UIDevice currentDevice];
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:YES];
+    BOOL exists = device.proximityMonitoringEnabled;
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:NO];
+    resolve(@(exists));
+
+}
+
 @end

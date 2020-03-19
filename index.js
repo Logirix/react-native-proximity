@@ -35,7 +35,12 @@ if (Platform.OS === 'ios') {
   };
 }
 
+const proximitySensorExists = async () => {
+  return await NativeModules.RNProximity.hasProximitySensor();
+}
+
 module.exports = {
   addListener,
   removeListener,
+  proximitySensorExists
 };

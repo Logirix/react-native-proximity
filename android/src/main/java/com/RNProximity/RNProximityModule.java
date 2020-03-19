@@ -2,6 +2,7 @@
 package com.RNProximity;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -57,6 +59,12 @@ public class RNProximityModule extends ReactContextBaseJavaModule implements Sen
   @ReactMethod
   public void removeListener() {
     mSensorManager.unregisterListener(this);
+  }
+
+  @ReactMethod
+  public void hasProximitySensor(Promise promise) {
+    PackageManager PM= this.reactContext.getPackageManager();
+    promise.resolve(PM.hasSystemFeature(PackageManager.FEATURE_SENSOR_PROXIMITY));
   }
 
   @Override
